@@ -9,19 +9,21 @@ By pulling this image without a tag you will get the `latest` version of this im
 
 The following table provides information about the basic runability of the fds executable for the corresponding guest operating system image. The table does not guarantee that your simulation job will run without any bugs or crashes. You should test your prefered version of this FDS-Docker-Image by yourself first!
 
-| FDS-Version (Tag)   | Linux (Ubuntu 18.04) | Mac OS (with Hyperkit) | Windows Server Core (v. 1809/1903) <sup>\*1</sup> |
-| ------------------- | :------------------- | :--------------------- | :------------------------------------------------ |
-| 6.7.3, latest       | ✅                   | ✅                    | ✅                                               |
-| 6.7.1               | ☑️ <sup>\*2</sup>    | ☑️ <sup>\*2</sup>     | ☑️ <sup>\*3</sup>                                |
-| 6.7.0               | ✅                   | ❌                    | ✅                                               |
-| 6.6.0               | ✅                   | ❌                    | ✅                                               |
-| 6.5.3               | ☑️ <sup>\*2</sup>    | ☑️ <sup>\*2</sup>     | ✅                                               |
+| FDS-Version (Tag)   | Linux                | Mac OS <sup>\*1</sup>  | Windows (v. 1809/1903) <sup>\*2</sup> |
+| ------------------- | :------------------- | :--------------------- | :------------------------------------ |
+| 6.7.3, latest       | ✅                   | ✅                    | ✅                                    |
+| 6.7.1               | ☑️ <sup>\*3</sup>    | ☑️ <sup>\*3</sup>     | ☑️ <sup>\*4</sup>                     |
+| 6.7.0               | ✅                   | ❌                    | ✅                                    |
+| 6.6.0               | ✅                   | ❌                    | ✅                                    |
+| 6.5.3               | ☑️ <sup>\*3</sup>    | ☑️ <sup>\*3</sup>     | ✅                                    |
 
-<sup>\*1</sup> Running with Hyper-V which is supported by Windows 10 Pro and Windows Server 2016. To improve performance it might be advisable to run the image in process isolation mode. This mode is the standard configuration of Windows Server 2016 and optional on Windows 10 Pro. Having said that process isolation mode for Windows 10 is meant for development/testing.
+<sup>\*1</sup> Running with Docker Desktop based on Hyperkit which is a lightweight virtualization solution for Mac OS. Under the hood it provides Docker inside a Linux virtual machine. So Docker for Mac only runs Linux containers.
 
-<sup>\*2</sup> Runs with warning (details on stackoverflow: [OpenMPI based on old hwloc doesn't support /proc/mount file having a line in it greater than 512 characters](https://stackoverflow.com/questions/46138549/docker-openmpi-and-unexpected-end-of-proc-mounts-line))
+<sup>\*2</sup> Running with Docker Desktop based on Hyper-V which is supported by Windows 10 Pro and Windows Server 2016. To improve performance it might be advisable to run the image in [process isolation mode](https://docs.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/hyperv-container). This mode is the standard configuration of Windows Server 2016 and optional on Windows 10 Pro. Having said that process isolation mode for Windows 10 is meant for development/testing.
 
-<sup>\*3</sup> `fds` command does not work as expected. You should use `fds_local` or `mpiexec` instead.
+<sup>\*3</sup> Runs with warning (details on stackoverflow: [OpenMPI based on old hwloc doesn't support /proc/mount file having a line in it greater than 512 characters](https://stackoverflow.com/questions/46138549/docker-openmpi-and-unexpected-end-of-proc-mounts-line))
+
+<sup>\*4</sup> `fds` command does not work as expected. You should use `fds_local` or `mpiexec` instead.
 
 ## How to use this image
 Inside Terminal (Linux/Mac OS) or PowerShell (Windows) navigate to a project folder (containing a fds-input file) and choose between the following two modes to run FDS.
