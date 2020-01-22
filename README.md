@@ -1,4 +1,4 @@
-# About [Dockerfiles for FDS (Github Repository)](https://github.com/openbcl/fds-dockerfiles)
+# About [Dockerfiles for FDS (GitHub Repository)](https://github.com/openbcl/fds-dockerfiles)
 [This repository](https://github.com/openbcl/fds-dockerfiles) provides Dockerfiles for building FDS-Docker-Images. Each indiviual dockerfile is provided under MIT-License. Nevertheless please consider that a container image (a file system that may include various copyrighted works) and the scripts to build these images (like a Dockerfile) are separate works. In general, the license of the included software is completely unrelated to the license of the build scripts.
 
 # About [this image (Docker Hub  Repository)](https://hub.docker.com/r/openbcl/fds)
