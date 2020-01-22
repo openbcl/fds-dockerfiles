@@ -6,9 +6,9 @@ contact_links:
   - name: FDS issues
     url: https://github.com/firemodels/fds/issues
     about: Please create issues about FDS unrelated to docker on this page.
-  - name: `Docker run` documentation
+  - name: Docker run documentation
     url: https://docs.docker.com/engine/reference/run/
-    about: Please visit this page if you have questions about how to use `Docker run`. 
+    about: Please visit this page if you have questions about how to use Docker run. 
   - name: Docker documentation
     url: https://docs.docker.com/
     about: Complete Docker documentation.
