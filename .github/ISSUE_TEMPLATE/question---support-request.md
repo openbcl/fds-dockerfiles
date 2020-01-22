@@ -2,7 +2,7 @@
 name: Question / Support request
 about: Having problems with running FDS in combination with Docker
 title: ''
-labels: ''
+labels: question
 assignees: rweisse, brandschutzconsult
 
 ---
