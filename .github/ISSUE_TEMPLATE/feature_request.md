@@ -21,8 +21,3 @@ assignees: rweisse, brandschutzconsult
 
 ## Additional context
 <!-- Add any other context or screenshots about the feature request here. -->
-
-## Desktop Environment
-- Operating System: <!-- e.g. Windows 10 Pro (v. 1803 / 1809 / 1903 / 1909 / ... ) / Linux (Distribution + Version) / Mac OS Mojave -->
-- Docker-Version: <!-- run `docker -v` and paste it here -->
-- Docker-Images: <!-- run `docker images openbcl/fds` and paste it here -->
