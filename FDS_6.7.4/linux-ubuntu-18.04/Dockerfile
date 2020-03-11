@@ -1,0 +1,26 @@
+# Ubuntu Image
+FROM ubuntu:18.04
+
+# provide setup-file
+ARG setupfile=https://github.com/firemodels/fds/releases/download/FDS6.7.4/FDS6.7.4_SMV6.7.14_lnx.sh
+
+# download FDS
+ADD $setupfile /root/
+
+# set environment variables
+ENV FDSBINDIR=/root/FDS/FDS6/bin
+ENV impihome=/root/FDS/FDS6/bin/INTEL
+ENV PATH=$FDSBINDIR:$impihome/bin:$PATH
+ENV FI_PROVIDER_PATH=$impihome/lib
+ENV LD_LIBRARY_PATH=/usr/lib64:$impihome/lib:$LD_LIBRARY_PATH
+
+# set execution rights, run setup script, remove setup script and unessential data, fix wrong name of libmpifort by symlink
+RUN chmod +x /root/*.sh && \
+    /root/*.sh y && \
+    rm /root/*.sh && \
+    mv /root/FDS/FDS6/bin /root/FDS/ && \
+    rm -rf /root/FDS/FDS6/* && \
+    mv /root/FDS/bin /root/FDS/FDS6/
+
+# set workdir for fds-simulation
+WORKDIR /workdir
