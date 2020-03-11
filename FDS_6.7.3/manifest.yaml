@@ -1,5 +1,4 @@
 image: openbcl/fds:6.7.3
-tags: [6.7.3, latest]
 manifests:
   -
     image: openbcl/fds:6.7.3-ubuntu-18.04
