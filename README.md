@@ -9,7 +9,7 @@ By pulling this image without a tag you will get the `latest` version of this im
 
 The following table provides information about the basic runability of the fds executable for the corresponding guest operating system image. The table does not guarantee that your simulation job will run without any bugs or crashes. You should test your prefered version of this FDS-Docker-Image by yourself first!
 
-| FDS-Version (Tag)   | Linux                | Mac OS <sup>\*1</sup>  | Windows (v. 1809/1903) <sup>\*2</sup> |
+| FDS-Version (Tag)   | Linux                | Mac OS <sup>\*1</sup>  | Windows <sup>\*2</sup> |
 | ------------------- | :------------------- | :--------------------- | :------------------------------------ |
 | 6.7.4, latest       | ✅                   | ✅                    | ✅                                    |
 | 6.7.3               | ✅                   | ✅                    | ✅                                    |

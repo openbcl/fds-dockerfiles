@@ -11,7 +11,7 @@ ADD $setupfile /root/
 ENV FDSBINDIR=/root/FDS/FDS6/bin
 ENV impihome=/root/FDS/FDS6/bin/INTEL
 ENV PATH=$FDSBINDIR:$impihome/bin:$PATH
-ENV FI_PROVIDER_PATH=$impihome/lib
+ENV FI_PROVIDER_PATH=$impihome/prov
 ENV LD_LIBRARY_PATH=/usr/lib64:$impihome/lib:$LD_LIBRARY_PATH
 
 # set execution rights, run setup script, remove setup script and unessential data, fix wrong name of libmpifort by symlink
