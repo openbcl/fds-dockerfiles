@@ -2,12 +2,12 @@
 [This repository](https://github.com/openbcl/fds-dockerfiles) provides Dockerfiles for building FDS-Docker-Images. Each indiviual dockerfile is provided under MIT-License. Nevertheless please consider that a container image (a file system that may include various copyrighted works) and the scripts to build these images (like a Dockerfile) are separate works. In general, the license of the included software is completely unrelated to the license of the build scripts.
 
 # About [this image (Docker Hub  Repository)](https://hub.docker.com/r/openbcl/fds)
-[This image](https://hub.docker.com/r/openbcl/fds) provides by third party the [FDS binaries from the National Institute of Standards and Technology (NIST)](https://pages.nist.gov/fds-smv/) for Windows and Linux containers. You may use it on your own risk (for details please have a look at the disclaimer). At the moment the image is based on [Windows Server Core](https://hub.docker.com/_/microsoft-windows-servercore) and on [Ubuntu](https://hub.docker.com/_/ubuntu). Smokeview is not included. You may wish to [download Smokeview](https://pages.nist.gov/fds-smv/downloads.html) and install it on your hosts operating system by yourself.
+[This image](https://hub.docker.com/r/openbcl/fds) is maintained by third party. It provides the [FDS binaries from the National Institute of Standards and Technology (NIST)](https://pages.nist.gov/fds-smv/) for Windows and Linux containers. The use of this image is at your own risk (for details please have a look at the disclaimer). At the moment the image is based on [Windows Server Core](https://hub.docker.com/_/microsoft-windows-servercore) and on [Ubuntu](https://hub.docker.com/_/ubuntu). Smokeview is not included. You may wish to [download Smokeview](https://pages.nist.gov/fds-smv/downloads.html) and install it on your hosts operating system by yourself.
 
 ## Supported tags
 By pulling this image without a tag you will get the `latest` version of this image for your operating system. In most cases this will contain the latest version of FDS. Otherwise you may wait some time until this image got updated. If you prefer another version of FDS you should add the version as a tag like (`6.5.3`, `6.6.0`, ...).
 
-The following table provides information about the basic runability of the fds executable for the corresponding guest operating system image. The table does not guarantee that your simulation job will run without any bugs or crashes. You should test your prefered version of this FDS-Docker-Image by yourself first!
+The following table provides information about the basic runability of the fds executable for the corresponding guest operating system image.
 
 | FDS-Version (Tag)   | Linux                | Mac OS <sup>\*1</sup>  | Windows <sup>\*2</sup> |
 | ------------------- | :------------------- | :--------------------- | :------------------------------------ |
@@ -27,7 +27,7 @@ The following table provides information about the basic runability of the fds e
 <sup>\*4</sup> `fds` command does not work as expected. You should use `fds_local` or `mpiexec` instead.
 
 ## How to use this image
-Inside Terminal (Linux/Mac OS) or PowerShell (Windows) navigate to a project folder (containing a fds-input file) and choose between the following two modes to run FDS.
+Inside Terminal (Linux/Mac OS) or PowerShell (Windows) navigate to a project folder (containing a *.fds inputfile) and choose between the following two modes to run FDS.
 
 ### Running FDS in interactive mode
 If you like to run FDS inside an interactive shell run:
@@ -36,21 +36,40 @@ If you like to run FDS inside an interactive shell run:
 * `--rm` will automatically remove the container when it exits
 * `-it` instructs Docker to allocate a pseudo shell
 * `-v` mounts the current working directory into the container
-* To run fds type `fds <name-of-your-inputfile>.fds` (you can also use `mpiexec` command)
+* To run FDS type: `fds <name-of-your-inputfile>.fds`
+* To run FDS together with MPI type: `mpiexec -n <meshcount> fds <name-of-your-inputfile>.fds`
 
 To close your container type `exit` after the simulation has finished
 
 ### Running FDS in non-interactive mode
-If you like to run your FDS-Job directly inside your container with one command run:
+If you like to run your FDS-Job directly with one command run:
 * on Windows Hostsystems: `docker run --rm -v ${pwd}:C:\workdir openbcl/fds fds <name-of-your-inputfile>.fds`
 * on Linux or Mac OS Hostsystems: `docker run --rm -v $(pwd):/workdir openbcl/fds fds <name-of-your-inputfile>.fds`
 
-You can also use `mpiexec` command instead of `fds`.
+If you like to run your FDS-Job together with MPI directly with one command run:
+* on Windows Hostsystems: `docker run --rm -v ${pwd}:C:\workdir openbcl/fds mpiexec -n <meshcount> fds <name-of-your-inputfile>.fds`
+* on Linux or Mac OS Hostsystems: `docker run --rm -v $(pwd):/workdir openbcl/fds mpiexec -n <meshcount> fds <name-of-your-inputfile>.fds`
+
 The container should be closed automatically after the job has been finished.
 
 ### Additional information
-##### OMP_NUM_THREADS
-Usually the setup routine of FDS will set a system environment variable called `OMP_NUM_THREADS`. This variable holds a number, representing the number of processor cores cut by half. OMP_NUM_THREADS has not been setted during the compilation of this image. Nevertheless FDS will use your machines number of processor cores by default. If you like to specify OMP_NUM_THREADS by yourself you might add `-e OMP_NUM_THREADS=<NR>` to previous run-command.
+#### Error when using mpiexec
+If you get an error like the following, you should increase the shared memory.
+```
+===================================================================================
+=   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES
+=   RANK 0 PID 9 RUNNING AT bfc9e9b610a2
+=   KILLED BY SIGNAL: 7 (Bus error)
+===================================================================================
+```
+To do so add `--shm-size=384M` to the run-commands described above.
+This will increase the default shared memory (64MB) to 384MB.
+
+#### OMP_NUM_THREADS
+Usually the setup routine of FDS will set a system environment variable called `OMP_NUM_THREADS`.
+This variable holds a number, representing the number of processor cores cut by half. OMP_NUM_THREADS has not been setted during the compilation of this image.
+Nevertheless FDS will use your machines number of processor cores by default. If you like to specify OMP_NUM_THREADS by yourself you might add `-e OMP_NUM_THREADS=<NR>` to the run-commands described above.
+If you are running FDS together with MPI it makes sense to select the following setting: `-e OMP_NUM_THREADS=1`
 
 #### WINDOWS: [Isolation Modes](https://docs.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/hyperv-container)
 * To create a container with Hyper-V isolation thorough Docker, use the `--isolation` parameter to set `--isolation=hyperv`.
@@ -58,6 +77,7 @@ Usually the setup routine of FDS will set a system environment variable called `
 
 #### LINUX: ulimit stack size
 [Sometimes FDS requires to increase the stack size to unlimited](https://github.com/firemodels/fds/issues/6265). To do so add `--ulimit stack=-1` to your run-command.
+However, so far this problem could not be observed when using docker.
 
 ## DISCLAIMER
 **THIS DOCKER IMAGE IS NOT ORIGINALLY PROVIDED BY NIST. THIS IS THIRD PARTY. WE MAKE NO WARRANTY OF ANY KIND, EXPRESS, IMPLIED, IN FACT OR ARISING BY OPERATION OF LAW, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT AND DATA ACCURACY. WE NEITHER REPRESENTS NOR WARRANTS THAT THE OPERATION OF THE SOFTWARE WILL BE UNINTERRUPTED OR ERROR-FREE, OR THAT ANY DEFECTS WILL BE CORRECTED. WE DO NOT WARRANT OR MAKE ANY REPRESENTATIONS REGARDING THE USE OF THE SOFTWARE OR THE RESULTS THEREOF, INCLUDING BUT NOT LIMITED TO THE CORRECTNESS, ACCURACY, RELIABILITY, OR USEFULNESS OF THE SOFTWARE.**

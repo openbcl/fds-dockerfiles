@@ -14,7 +14,7 @@ ENV PATH=$FDSBINDIR:$impihome/bin:$PATH
 ENV FI_PROVIDER_PATH=$impihome/prov
 ENV LD_LIBRARY_PATH=/usr/lib64:$impihome/lib:$LD_LIBRARY_PATH
 
-# set execution rights, run setup script, remove setup script and unessential data, fix wrong name of libmpifort by symlink
+# set execution rights, run setup script, remove setup script and unessential data
 RUN chmod +x /root/*.sh && \
     /root/*.sh y && \
     rm /root/*.sh && \
