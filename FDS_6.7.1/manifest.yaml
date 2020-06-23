@@ -5,18 +5,3 @@ manifests:
     platform:
       architecture: amd64
       os: linux
-  -
-    image: openbcl/fds:6.7.1-windows-servercore-ltsc2019
-    platform:
-      architecture: amd64
-      os: windows
-  -
-    image: openbcl/fds:6.7.1-windows-servercore-1903
-    platform:
-      architecture: amd64
-      os: windows
-  -
-    image: openbcl/fds:6.7.1-windows-servercore-1909
-    platform:
-      architecture: amd64
-      os: windows

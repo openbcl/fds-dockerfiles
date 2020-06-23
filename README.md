@@ -13,7 +13,7 @@ The following table provides information about the basic runability of the fds e
 | ------------------- | :------------------- | :--------------------- | :------------------------------------ |
 | 6.7.4, latest       | ✅                   | ✅                    | ✅                                    |
 | 6.7.3               | ✅                   | ✅                    | ✅                                    |
-| 6.7.1               | ☑️ <sup>\*3</sup>    | ☑️ <sup>\*3</sup>     | ☑️ <sup>\*4</sup>                     |
+| 6.7.1               | ☑️ <sup>\*3</sup>    | ☑️ <sup>\*3</sup>     | ❌                                    |
 | 6.7.0               | ✅                   | ❌                    | ✅                                    |
 | 6.6.0               | ✅                   | ❌                    | ✅                                    |
 | 6.5.3               | ☑️ <sup>\*3</sup>    | ☑️ <sup>\*3</sup>     | ✅                                    |
@@ -23,8 +23,6 @@ The following table provides information about the basic runability of the fds e
 <sup>\*2</sup> Running with Docker Desktop based on Hyper-V which is supported by Windows 10 Pro and Windows Server 2016. To improve performance it might be advisable to run the image in [process isolation mode](https://docs.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/hyperv-container). This mode is the standard configuration of Windows Server 2016 and optional on Windows 10 Pro. Having said that process isolation mode for Windows 10 is meant for development/testing.
 
 <sup>\*3</sup> Runs with warning (details on stackoverflow: [OpenMPI based on old hwloc doesn't support /proc/mount file having a line in it greater than 512 characters](https://stackoverflow.com/questions/46138549/docker-openmpi-and-unexpected-end-of-proc-mounts-line)). This should not affect the functionality of FDS.
-
-<sup>\*4</sup> `fds` command does not work as expected. You should use `fds_local` or `mpiexec` instead.
 
 ## How to use this image
 Inside Terminal (Linux/Mac OS) or PowerShell (Windows) navigate to a project folder (containing a *.fds inputfile) and choose between the following two modes to run FDS.
