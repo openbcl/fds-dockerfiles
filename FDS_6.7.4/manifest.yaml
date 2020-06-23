@@ -16,3 +16,8 @@ manifests:
     platform:
       architecture: amd64
       os: windows
+  -
+    image: openbcl/fds:6.7.4-windows-servercore-1909
+    platform:
+      architecture: amd64
+      os: windows
