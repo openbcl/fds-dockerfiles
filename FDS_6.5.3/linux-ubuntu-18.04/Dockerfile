@@ -21,8 +21,7 @@ ENV PATH=$MPIDIST/bin:$FDSBINDIR:$PATH
 ENV LD_LIBRARY_PATH=$MPIDIST/lib:$FDSBINDIR/LIB64:$INTEL_SHARED_LIB:$LD_LIBRARY_PATH
 
 # add nonroot user for openmpi, set execution rights, run setup script, remove setup script, extract openmpi archive, remove unessential data, set execution rights
-RUN adduser --system --group nonroot && \
-    chmod +x /root/*.sh && \
+RUN chmod +x /root/*.sh && \
     /root/*.sh y && \
     rm /root/*.sh && \
     tar xvf /root/FDS/FDS6/bin/openmpi_*.tar.gz -C /root/FDS/FDS6/bin/ && \
@@ -30,10 +29,13 @@ RUN adduser --system --group nonroot && \
     mv /root/FDS/FDS6/bin /root/FDS/ && \
     rm -rf /root/FDS/FDS6/* && \
     mv /root/FDS/bin /root/FDS/FDS6/ && \
-    chown -R root:nonroot /root && \
-    chmod -R g+X /root
+    mkdir -p /shared/openmpi_64/share && \
+    mv /root/FDS/FDS6/bin/openmpi_64/share/openmpi /shared/openmpi_64/share/openmpi
 
-USER nonroot
+# mpiexec won't run as root without '--allow-run-as-root' parameter - let's fix it with a simple hack
+RUN mv /root/FDS/FDS6/bin/openmpi_64/bin/mpiexec /root/FDS/FDS6/bin/openmpi_64/bin/mpiexec_orig && \
+    echo '#!/bin/bash\nmpiexec_orig --allow-run-as-root $@' >> /root/FDS/FDS6/bin/openmpi_64/bin/mpiexec && \
+    chmod 755 /root/FDS/FDS6/bin/openmpi_64/bin/mpiexec
 
 # set workdir for fds-simulation
 WORKDIR /workdir

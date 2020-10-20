@@ -63,6 +63,7 @@ If you get an error like the following, you should increase the shared memory.
 ```
 To do so add `--shm-size=384M` to the run-commands described above.
 This will increase the default shared memory (64MB) to 384MB.
+Maybe you have to chose a higher value (depending on your simulation).
 
 #### OMP_NUM_THREADS
 Usually the setup routine of FDS will set a system environment variable called `OMP_NUM_THREADS`.
@@ -76,7 +77,6 @@ If you are running FDS together with MPI it makes sense to select the following 
 
 #### LINUX: ulimit stack size
 [Sometimes FDS requires to increase the stack size to unlimited](https://github.com/firemodels/fds/issues/6265). To do so add `--ulimit stack=-1` to your run-command.
-However, so far this problem could not be observed when using docker.
 
 ## DISCLAIMER
 **THIS DOCKER IMAGE IS NOT ORIGINALLY PROVIDED BY NIST. THIS IS THIRD PARTY. WE MAKE NO WARRANTY OF ANY KIND, EXPRESS, IMPLIED, IN FACT OR ARISING BY OPERATION OF LAW, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT AND DATA ACCURACY. WE NEITHER REPRESENTS NOR WARRANTS THAT THE OPERATION OF THE SOFTWARE WILL BE UNINTERRUPTED OR ERROR-FREE, OR THAT ANY DEFECTS WILL BE CORRECTED. WE DO NOT WARRANT OR MAKE ANY REPRESENTATIONS REGARDING THE USE OF THE SOFTWARE OR THE RESULTS THEREOF, INCLUDING BUT NOT LIMITED TO THE CORRECTNESS, ACCURACY, RELIABILITY, OR USEFULNESS OF THE SOFTWARE.**
