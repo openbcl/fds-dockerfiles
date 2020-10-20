@@ -20,7 +20,7 @@ ENV MPIDIST=$MPIDIST_FDS
 ENV PATH=$MPIDIST/bin:$FDSBINDIR:$PATH
 ENV LD_LIBRARY_PATH=$MPIDIST/lib:$FDSBINDIR/LIB64:$INTEL_SHARED_LIB:$LD_LIBRARY_PATH
 
-# add nonroot user for openmpi, set execution rights, run setup script, remove setup script, extract openmpi archive, remove unessential data, set execution rights
+# set execution rights, run setup script, remove setup script, extract openmpi archive, remove unessential data, set execution rights
 RUN chmod +x /root/*.sh && \
     /root/*.sh y && \
     rm /root/*.sh && \

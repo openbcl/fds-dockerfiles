@@ -14,7 +14,7 @@ ADD $setupfile /root/
 ENV LAMHELPDIR=/etc/lam/
 ENV PATH=/home/lam/FDS/FDS5/bin:$PATH
 
-# add nonroot user for openmpi, set execution rights, run setup script, remove setup script, extract openmpi archive, remove unessential data, set execution rights
+# add nonroot user for lam mpi, extract fds archive, remove unessential data, move folders and rename files, create lamboot-starter-script, set execution rights
 RUN useradd -m lam && \
     tar xvf /root/*.tar.gz -C /root/ && \
     rm /root/*.tar.gz && \
@@ -26,6 +26,7 @@ RUN useradd -m lam && \
     mv /root/FDS /home/lam/ && \
     chown -R lam: /home/lam/FDS
 
+# login as lam user
 USER lam
 
 # set workdir for fds-simulation
