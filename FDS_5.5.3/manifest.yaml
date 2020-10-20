@@ -1,0 +1,7 @@
+image: openbcl/fds:5.5.3
+manifests:
+  -
+    image: openbcl/fds:5.5.3-ubuntu-18.04
+    platform:
+      architecture: amd64
+      os: linux
