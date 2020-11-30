@@ -20,3 +20,13 @@ manifests:
     platform:
       architecture: amd64
       os: windows
+  -
+    image: openbcl/fds:6.5.3-windows-servercore-2004
+    platform:
+      architecture: amd64
+      os: windows
+  -
+    image: openbcl/fds:6.5.3-windows-servercore-20H2
+    platform:
+      architecture: amd64
+      os: windows
