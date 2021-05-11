@@ -5,7 +5,7 @@ FROM ubuntu:18.04
 RUN apt-get update && apt-get install -y lam-runtime
 
 # provide setup-file
-ARG setupfile=https://dl.bintray.com/nist-fire-research/releases/FDS_5.5.3-SMV_5.6_linux_64.tar.gz
+ARG setupfile=https://github.com/firemodels/fds/releases/download/Git/FDS_5.5.3-SMV_5.6_linux_64.tar.gz
 
 # download FDS
 ADD $setupfile /root/
