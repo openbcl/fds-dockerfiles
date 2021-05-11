@@ -26,7 +26,7 @@ The following table provides information about the basic runability of the fds e
 
 # How to use this image
 
-To run the newest version of FDS (without doing simulation at all) please run the following command for testing purposes.
+To run the latest version of FDS (without doing simulation at all) please run the following command for testing purposes.
 ```bash
 docker run --rm openbcl/fds fds
 ```
