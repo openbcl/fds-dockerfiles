@@ -36,9 +36,10 @@ To launch another version of FDS (for example 6.7.3) you must append the appropr
 docker run --rm openbcl/fds:6.7.3 fds
 ```
 
+## Running FDS in non-interactive mode (recommended)
 In order for FDS to access a simulation file within the Docker container you must share a folder on your local file system with the container.
 To do so navigate with your Terminal/PowerShell to a simulation folder (containing a .fds inputfile) and run one of the following commands depending on your host operating system and docker mode.
-*Please note: Under Windows, only local disks can currently be mounted as volumes. Therefore, network drives or network paths cannot yet be mounted as volumes.*
+*Please note: On Windows only local disks can currently be mounted as volumes. Therefore network drives or network paths cannot be mounted as volumes yet.*
 ```bash
 # Linux / Mac OS
 docker run --rm -v $(pwd):/wordkir openbcl/fds fds <filename>.fds
