@@ -17,7 +17,7 @@ The following table provides information about the basic runability of the fds e
 | 6.7.3               | ✅                   | ✅                              | ✅                    |
 | 6.7.1               | ☑️ <sup>\*3</sup>    | ☑️ <sup>\*3</sup>               | ❌                    |
 | 6.7.0               | ✅                   | ❌                              | ✅                    |
-| 6.6.0               | ✅                   | ❌                              | ✅                    
+| 6.6.0               | ✅                   | ❌                              | ✅
 | 6.5.3               | ☑️ <sup>\*3</sup>    | ☑️ <sup>\*3</sup>               | ✅                    |
 | 5.5.3               | ✅                   | ✅                              | ☑️ <sup>\*4</sup>     |
 
@@ -47,10 +47,10 @@ To do so navigate with your Terminal/PowerShell to a simulation folder (containi
 *Please note: On Windows only local disks can currently be mounted as volumes. Therefore network drives or network paths cannot be mounted as volumes yet.*
 ```bash
 # Linux / Mac OS
-docker run --rm -v $(pwd):/wordkir openbcl/fds fds <filename>.fds
+docker run --rm -v $(pwd):/workdir openbcl/fds fds <filename>.fds
 
 # Windows running Docker in Linux mode
-docker run --rm -v ${pwd}:/wordkir openbcl/fds fds <filename>.fds
+docker run --rm -v ${pwd}:/workdir openbcl/fds fds <filename>.fds
 
 # Windows running Docker in Windows mode
 docker run --rm -v ${pwd}:C:\workdir openbcl/fds fds <filename>.fds
@@ -60,20 +60,20 @@ In most cases the execution of FDS via MPI is also supported.
 The following lines of code are examples of commands for Linux host operating systems.
 ```bash
 # FDS 6.5.3 and later
-docker run --rm -v $(pwd):/wordkir openbcl/fds mpiexec -n <meshcount> fds <filename>.fds
+docker run --rm -v $(pwd):/workdir openbcl/fds mpiexec -n <meshcount> fds <filename>.fds
 
 # FDS 5.5.3
-docker run --rm -v $(pwd):/wordkir openbcl/fds lamboot mpirun -np <meshcount> fds_mpi <filename>.fds
+docker run --rm -v $(pwd):/workdir openbcl/fds lamboot mpirun -np <meshcount> fds_mpi <filename>.fds
 ```
 
 ## Running FDS in interactive mode
 If you like to run FDS inside an interactive shell run one of the following commands depending on your host operating system and docker mode.
 ```bash
 # Linux / Mac OS
-docker run --rm -it -v $(pwd):/wordkir openbcl/fds
+docker run --rm -it -v $(pwd):/workdir openbcl/fds
 
 # Windows running Docker in Linux mode
-docker run --rm -it -v ${pwd}:/wordkir openbcl/fds
+docker run --rm -it -v ${pwd}:/workdir openbcl/fds
 
 # Windows running Docker in Windows mode
 docker run --rm -it -v ${pwd}:C:\workdir openbcl/fds
