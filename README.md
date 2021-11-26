@@ -1,5 +1,8 @@
 *[This image](https://hub.docker.com/r/openbcl/fds) is maintained by third party. It provides the [FDS binaries from the National Institute of Standards and Technology (NIST)](https://pages.nist.gov/fds-smv/) for Windows and Linux containers. The use of this image is at your own risk. At the moment the image is based on [Windows Server Core](https://hub.docker.com/_/microsoft-windows-servercore) and on [Ubuntu](https://hub.docker.com/_/ubuntu). Smokeview is not included. You may want to [download Smokeview](https://pages.nist.gov/fds-smv/downloads.html) and install it on your hosts operating system by yourself.*
 
+> # Support for Windows discontinued 
+> We decided to take this step because Windows base images are insufficiently kept up-to-date. Quarterly and half-yearly updates of Windows usually require customized base images for Docker to continue launching containers in process isolation mode on uptodate windows host systems. Furthermore, under Docker Desktop, the virtualization technology WSL2 is now preferred, which will replace Hyper-V technology for linux containers. We recommend running Docker Desktop on Windows in Linux container mode with WSL2. Running Docker with Windows containers in Hyper-V mode has no advantages over WSL2. Therefore Windows images will no longer be released in the future. Previously released Windows images will not be removed in the near future.
+
 # Supported tags
 By pulling this image without a tag you will get the `latest` version of FDS for your operating system. If you prefer another version of FDS you should add the version as a tag like (`5.5.3`, `6.5.3`, ...).
 
@@ -7,7 +10,8 @@ The following table provides information about the basic runability of the fds e
 
 | FDS-Version (Tag)   | Linux                | WSL 2 / Hyperkit <sup>\*1</sup>  | Windows <sup>\*2</sup> |
 | ------------------- | :------------------- | :------------------------------- | :--------------------- |
-| 6.7.6, latest       | ✅                   | ✅                              | ✅                    |
+| 6.7.7, latest       | ✅                   | ✅                              | ❌                    |
+| 6.7.6               | ✅                   | ✅                              | ✅                    |
 | 6.7.5               | ✅                   | ✅                              | ✅                    |
 | 6.7.4               | ✅                   | ✅                              | ✅                    |
 | 6.7.3               | ✅                   | ✅                              | ✅                    |
