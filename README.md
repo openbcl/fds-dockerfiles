@@ -19,6 +19,8 @@ The following table provides information about the basic runability of the fds e
 | 6.7.0               | ✅                   | ❌                              | ✅                    |
 | 6.6.0               | ✅                   | ❌                              | ✅
 | 6.5.3               | ☑️ <sup>\*3</sup>    | ☑️ <sup>\*3</sup>               | ✅                    |
+| 6.3.0               | ☑️ <sup>\*3</sup>    | ☑️ <sup>\*3</sup>               | ❌                    |
+| 6.2.0               | ☑️ <sup>\*3</sup>    | ☑️ <sup>\*3</sup>               | ❌                    |
 | 5.5.3               | ✅                   | ✅                              | ☑️ <sup>\*4</sup>     |
 
 <sup>\*1</sup> Running with Docker Desktop based on Hyperkit (Mac OS) or WSL 2 (Windows) which are a lightweight virtualization solutions for Linux Docker containers.
