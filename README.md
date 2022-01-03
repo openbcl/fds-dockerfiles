@@ -1,6 +1,6 @@
 *[This image](https://hub.docker.com/r/openbcl/fds) is maintained by third party. It provides the [FDS binaries from the National Institute of Standards and Technology (NIST)](https://pages.nist.gov/fds-smv/) for Windows and Linux containers. The use of this image is at your own risk. At the moment the image is based on [Windows Server Core](https://hub.docker.com/_/microsoft-windows-servercore) and on [Ubuntu](https://hub.docker.com/_/ubuntu). Smokeview is not included. You may want to [download Smokeview](https://pages.nist.gov/fds-smv/downloads.html) and install it on your hosts operating system by yourself.*
 
-> # Support for Windows discontinued 
+> # Support for Windows discontinued
 > We decided to take this step because Windows base images are insufficiently kept up-to-date. Quarterly and half-yearly updates of Windows usually require customized base images for Docker to continue launching containers in process isolation mode on up-to-date windows host systems. Furthermore, under Docker Desktop, the virtualization technology WSL2 is now preferred, which will replace Hyper-V technology for linux containers. We recommend running Docker Desktop on Windows in Linux container mode with WSL2. Running Docker with Windows containers in Hyper-V mode has no advantages over WSL2. Therefore Windows images will no longer be released in the future. Previously released Windows images will not be removed in the near future.
 
 # Supported tags
@@ -45,17 +45,23 @@ docker run --rm openbcl/fds:6.7.3 fds
 
 ## Running FDS in non-interactive mode (recommended)
 In order for FDS to access a simulation file within the Docker container you must share a folder on your local file system with the container.
-To do so navigate with your Terminal/PowerShell to a simulation folder (containing a .fds inputfile) and run one of the following commands depending on your host operating system and docker mode.
+To do so navigate with your Terminal/Shell to a simulation folder (containing a .fds inputfile) and run one of the following commands depending on your host operating system and docker mode.
 *Please note: On Windows only local disks can currently be mounted as volumes. Therefore network drives or network paths cannot be mounted as volumes yet.*
 ```bash
 # Linux / Mac OS
 docker run --rm -v $(pwd):/workdir openbcl/fds fds <filename>.fds
 
-# Windows running Docker in Linux mode
+# Windows PowerShell running Docker in Linux mode
 docker run --rm -v ${pwd}:/workdir openbcl/fds fds <filename>.fds
 
-# Windows running Docker in Windows mode
+# Windows PowerShell running Docker in Windows mode
 docker run --rm -v ${pwd}:C:\workdir openbcl/fds fds <filename>.fds
+
+# Windows Command Prompt running Docker in Linux Mode
+docker run --rm -v %cd%:/workdir openbcl/fds fds <filename>.fds
+
+# Windows Command Prompt running Docker in Windows mode
+docker run --rm -v %cd%:C:\workdir openbcl/fds fds <filename>.fds
 ```
 
 In most cases the execution of FDS via MPI is also supported.
@@ -74,11 +80,17 @@ If you like to run FDS inside an interactive shell run one of the following comm
 # Linux / Mac OS
 docker run --rm -it -v $(pwd):/workdir openbcl/fds
 
-# Windows running Docker in Linux mode
+# Windows PowerShell running Docker in Linux mode
 docker run --rm -it -v ${pwd}:/workdir openbcl/fds
 
-# Windows running Docker in Windows mode
+# Windows PowerShell running Docker in Windows mode
 docker run --rm -it -v ${pwd}:C:\workdir openbcl/fds
+
+# Windows Command Prompt running Docker in Linux Mode
+docker run --rm -it -v %cd%:/workdir openbcl/fds
+
+# Windows Command Prompt running Docker in Windows mode
+docker run --rm -it -v %cd%:C:\workdir openbcl/fds
 ```
 
 You will be connected to the interactive shell of your Docker container and have the possibility to start FDS in the usual way.
