@@ -67,7 +67,7 @@ docker run --rm -v %cd%:C:\workdir openbcl/fds fds <filename>.fds
 In most cases the execution of FDS via MPI is also supported.
 The following lines of code are examples of commands for Linux host operating systems.
 ```bash
-# FDS 6.5.3 and later
+# FDS 6.2.0 and later
 docker run --rm -v $(pwd):/workdir openbcl/fds mpiexec -n <meshcount> fds <filename>.fds
 
 # FDS 5.5.3
