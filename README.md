@@ -10,7 +10,8 @@ The following table provides information about the basic runability of the fds e
 
 | FDS-Version (Tag)   | Linux                | WSL 2 / Hyperkit <sup>\*1</sup>  | Windows <sup>\*2</sup> |
 | ------------------- | :------------------- | :------------------------------- | :--------------------- |
-| 6.7.7, latest       | ✅                   | ✅                              | ❌                    |
+| 6.7.8, latest       | ✅                   | ✅                              | ❌                    |
+| 6.7.7               | ✅                   | ✅                              | ❌                    |
 | 6.7.6               | ✅                   | ✅                              | ✅                    |
 | 6.7.5               | ✅                   | ✅                              | ✅                    |
 | 6.7.4               | ✅                   | ✅                              | ✅                    |
@@ -114,7 +115,10 @@ Usually the setup routine of FDS will set a system environment variable called `
 This variable holds a number representing the number of processor cores cut by half. OMP_NUM_THREADS has not been setted during the compilation of this image.
 Nevertheless FDS will use your machines number of processor cores by default. If you like to specify OMP_NUM_THREADS by yourself you might add `-e OMP_NUM_THREADS=<NR>` to the run-commands described above.
 If you are running FDS together with MPI it makes sense to select the following setting: `-e OMP_NUM_THREADS=1` to disable OpenMP.
-At the moment for FDS 5.5.3 OpenMP is disabled by default.
+If you are running FDS version 6.7.8 (and later) or FDS version 5.5.3 OpenMP is disabled by default.
+
+**For FDS version 6.7.8 (and later) you should replace `fds` with `fds_openmp` in your command to be able to run FDS together with OpenMP.**
+
 
 ### WINDOWS: [Isolation Modes](https://docs.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/hyperv-container)
 * To create a container with Hyper-V isolation use the `--isolation` parameter to set `--isolation=hyperv`. (default for Windows 10)
@@ -145,13 +149,3 @@ To do so add `--ulimit stack=-1` to the `docker run` command described above.
 **THIS DOCKER IMAGE IS NOT ORIGINALLY PROVIDED BY NIST. THIS IS THIRD PARTY. WE MAKE NO WARRANTY OF ANY KIND, EXPRESS, IMPLIED, IN FACT OR ARISING BY OPERATION OF LAW, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT AND DATA ACCURACY. WE NEITHER REPRESENTS NOR WARRANTS THAT THE OPERATION OF THE SOFTWARE WILL BE UNINTERRUPTED OR ERROR-FREE, OR THAT ANY DEFECTS WILL BE CORRECTED. WE DO NOT WARRANT OR MAKE ANY REPRESENTATIONS REGARDING THE USE OF THE SOFTWARE OR THE RESULTS THEREOF, INCLUDING BUT NOT LIMITED TO THE CORRECTNESS, ACCURACY, RELIABILITY, OR USEFULNESS OF THE SOFTWARE.**
 
 **This image is not intended to be used in any situation where a failure could cause risk of injury or damage to property.**
-
-## [FDS-LICENSE](https://github.com/firemodels/fds/blob/master/LICENSE.md)
-<blockquote>
-
-*NIST-developed software is provided by NIST as a public service. You may use, copy and distribute copies of the software in any medium, provided that you keep intact this entire notice. You may improve, modify and create derivative works of the software or any portion of the software, and you may copy and distribute such modifications or works. Modified works should carry a notice stating that you changed the software and should note the date and nature of any such change. Please explicitly acknowledge the National Institute of Standards and Technology as the source of the software.*
-
-*NIST-developed software is expressly provided “AS IS.” NIST MAKES NO WARRANTY OF ANY KIND, EXPRESS, IMPLIED, IN FACT OR ARISING BY OPERATION OF LAW, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT AND DATA ACCURACY. NIST NEITHER REPRESENTS NOR WARRANTS THAT THE OPERATION OF THE SOFTWARE WILL BE UNINTERRUPTED OR ERROR-FREE, OR THAT ANY DEFECTS WILL BE CORRECTED. NIST DOES NOT WARRANT OR MAKE ANY REPRESENTATIONS REGARDING THE USE OF THE SOFTWARE OR THE RESULTS THEREOF, INCLUDING BUT NOT LIMITED TO THE CORRECTNESS, ACCURACY, RELIABILITY, OR USEFULNESS OF THE SOFTWARE.*
-
-*You are solely responsible for determining the appropriateness of using and distributing the software and you assume all risks associated with its use, including but not limited to the risks and costs of program errors, compliance with applicable laws, damage to or loss of data, programs or equipment, and the unavailability or interruption of operation. This software is not intended to be used in any situation where a failure could cause risk of injury or damage to property. The software developed by NIST employees is not subject to copyright protection within the United States.*
-</blockquote>
