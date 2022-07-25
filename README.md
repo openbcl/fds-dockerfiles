@@ -10,7 +10,8 @@ The following table provides information about the basic runability of the fds e
 
 | FDS-Version (Tag)   | Linux                | WSL 2 / Hyperkit <sup>\*1</sup>  | Windows <sup>\*2</sup> |
 | ------------------- | :------------------- | :------------------------------- | :--------------------- |
-| 6.7.8, latest       | ✅                   | ✅                              | ❌                    |
+| 6.7.9, latest       | ✅                   | ✅                              | ❌                    |
+| 6.7.8               | ✅                   | ✅                              | ❌                    |
 | 6.7.7               | ✅                   | ✅                              | ❌                    |
 | 6.7.6               | ✅                   | ✅                              | ✅                    |
 | 6.7.5               | ✅                   | ✅                              | ✅                    |
