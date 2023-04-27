@@ -1,37 +1,30 @@
-*[This image](https://hub.docker.com/r/openbcl/fds) is maintained by third party. It provides the [FDS binaries from the National Institute of Standards and Technology (NIST)](https://pages.nist.gov/fds-smv/) for Windows and Linux containers. The use of this image is at your own risk. At the moment the image is based on [Windows Server Core](https://hub.docker.com/_/microsoft-windows-servercore) and on [Ubuntu](https://hub.docker.com/_/ubuntu). Smokeview is not included. You may want to [download Smokeview](https://pages.nist.gov/fds-smv/downloads.html) and install it on your hosts operating system by yourself.*
-
-> # Support for Windows discontinued
-> We decided to take this step because Windows base images are insufficiently kept up-to-date. Quarterly and half-yearly updates of Windows usually require customized base images for Docker to continue launching containers in process isolation mode on up-to-date windows host systems. Furthermore, under Docker Desktop, the virtualization technology WSL2 is now preferred, which will replace Hyper-V technology for linux containers. We recommend running Docker Desktop on Windows in Linux container mode with WSL2. Running Docker with Windows containers in Hyper-V mode has no advantages over WSL2. Therefore Windows images will no longer be released in the future. Previously released Windows images will not be removed in the near future.
+*[This image](https://hub.docker.com/r/openbcl/fds) is maintained by third party. It provides the [FDS binaries from the National Institute of Standards and Technology (NIST)](https://pages.nist.gov/fds-smv/) for Windows and Linux containers. The use of this image is at your own risk. At the moment the image is based on [Ubuntu](https://hub.docker.com/_/ubuntu). Smokeview is not included. You may want to [download Smokeview](https://pages.nist.gov/fds-smv/downloads.html) and install it on your hosts operating system by yourself.*
 
 # Supported tags
-By pulling this image without a tag you will get the `latest` version of FDS for your operating system. If you prefer another version of FDS you should add the version as a tag like (`5.5.3`, `6.5.3`, ...).
+By pulling this image without a tag you will get the `latest` version of FDS for your operating system. If you prefer another version of FDS you are free to add the version as a tag like (`5.5.3`, `6.5.3`, ...).
 
-The following table provides information about the basic runability of the fds executable for the corresponding guest operating system image and docker mode.
+The following table provides information about the basic runability of fds containers for different operating systems.
 
-| FDS-Version (Tag)   | Linux                | WSL 2 / Hyperkit <sup>\*1</sup>  | Windows <sup>\*2</sup> |
-| ------------------- | :------------------- | :------------------------------- | :--------------------- |
-| 6.7.9, latest       | ✅                   | ✅                              | ❌                    |
-| 6.7.8               | ✅                   | ✅                              | ❌                    |
-| 6.7.7               | ✅                   | ✅                              | ❌                    |
-| 6.7.6               | ✅                   | ✅                              | ✅                    |
-| 6.7.5               | ✅                   | ✅                              | ✅                    |
-| 6.7.4               | ✅                   | ✅                              | ✅                    |
-| 6.7.3               | ✅                   | ✅                              | ✅                    |
-| 6.7.1               | ☑️ <sup>\*3</sup>    | ☑️ <sup>\*3</sup>               | ❌                    |
-| 6.7.0               | ✅                   | ❌                              | ✅                    |
-| 6.6.0               | ✅                   | ❌                              | ✅
-| 6.5.3               | ☑️ <sup>\*3</sup>    | ☑️ <sup>\*3</sup>               | ✅                    |
-| 6.3.0               | ☑️ <sup>\*3</sup>    | ☑️ <sup>\*3</sup>               | ❌                    |
-| 6.2.0               | ☑️ <sup>\*3</sup>    | ☑️ <sup>\*3</sup>               | ❌                    |
-| 5.5.3               | ✅                   | ✅                              | ☑️ <sup>\*4</sup>     |
+| FDS-Version (Tag)   | Linux                | WSL 2 (Windows) / Hyperkit (Mac OS) <sup>\*1</sup>  |
+| ------------------- | :------------------- | :-------------------------------------------------- |
+| 6.7.9, latest       | ✅                   | ✅                                                 |
+| 6.7.8               | ✅                   | ✅                                                 |
+| 6.7.7               | ✅                   | ✅                                                 |
+| 6.7.6               | ✅                   | ✅                                                 |
+| 6.7.5               | ✅                   | ✅                                                 |
+| 6.7.4               | ✅                   | ✅                                                 |
+| 6.7.3               | ✅                   | ✅                                                 |
+| 6.7.1               | ☑️ <sup>\*2</sup>    | ☑️ <sup>\*2</sup>                                  |
+| 6.7.0               | ✅                   | ❌                                                 |
+| 6.6.0               | ✅                   | ❌                                                 |
+| 6.5.3               | ☑️ <sup>\*2</sup>    | ☑️ <sup>\*2</sup>                                  |
+| 6.3.0               | ☑️ <sup>\*2</sup>    | ☑️ <sup>\*2</sup>                                  |
+| 6.2.0               | ☑️ <sup>\*2</sup>    | ☑️ <sup>\*2</sup>                                  |
+| 5.5.3               | ✅                   | ✅                                                 |
 
 <sup>\*1</sup> Running with Docker Desktop based on Hyperkit (Mac OS) or WSL 2 (Windows) which are a lightweight virtualization solutions for Linux Docker containers.
 
-<sup>\*2</sup> Running with Docker Desktop based on Hyper-V which is supported by Windows 10 Pro and Windows Server 2016. To improve performance it might be advisable to run the image in [process isolation mode](https://docs.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/hyperv-container). This mode is the standard configuration of Windows Server 2016 and optional on Windows 10 Pro. Process isolation mode for Windows 10 is officially meant by Microsoft for development/testing.
-
-<sup>\*3</sup> Running with [warning](https://stackoverflow.com/questions/46138549/docker-openmpi-and-unexpected-end-of-proc-mounts-line). This should not affect the functionality of FDS.
-
-<sup>\*4</sup> MPI and OpenMP are disabled
+<sup>\*2</sup> Running with [warning](https://stackoverflow.com/questions/46138549/docker-openmpi-and-unexpected-end-of-proc-mounts-line). This should not affect the functionality of FDS.
 
 # How to use this image
 
@@ -39,34 +32,27 @@ To run the latest version of FDS (without doing simulation at all) please run th
 ```bash
 docker run --rm openbcl/fds fds
 ```
-
-To launch another version of FDS (for example 6.7.3) you must append the appropriate tag to the image name.
+To run another version of FDS (e.g. 6.7.3) you have to append the corresponding tag to the image name.
 ```bash
 docker run --rm openbcl/fds:6.7.3 fds
 ```
 
 ## Running FDS in non-interactive mode (recommended)
-In order for FDS to access a simulation file within the Docker container you must share a folder on your local file system with the container.
-To do so navigate with your Terminal/Shell to a simulation folder (containing a .fds inputfile) and run one of the following commands depending on your host operating system and docker mode.
+In order for FDS to access a simulation file within the Docker container you have to share a folder on your local file system with the container.
+To do so navigate with your Terminal/Shell to a simulation folder (containing a .fds inputfile) and run one of the following commands depending on your host operating system and shell type.
 *Please note: On Windows only local disks can currently be mounted as volumes. Therefore network drives or network paths cannot be mounted as volumes yet.*
 ```bash
 # Linux / Mac OS
 docker run --rm -v $(pwd):/workdir openbcl/fds fds <filename>.fds
 
-# Windows PowerShell running Docker in Linux mode
+# Windows PowerShell
 docker run --rm -v ${pwd}:/workdir openbcl/fds fds <filename>.fds
 
-# Windows PowerShell running Docker in Windows mode
-docker run --rm -v ${pwd}:C:\workdir openbcl/fds fds <filename>.fds
-
-# Windows Command Prompt running Docker in Linux Mode
+# Windows Command Prompt
 docker run --rm -v %cd%:/workdir openbcl/fds fds <filename>.fds
-
-# Windows Command Prompt running Docker in Windows mode
-docker run --rm -v %cd%:C:\workdir openbcl/fds fds <filename>.fds
 ```
 
-In most cases the execution of FDS via MPI is also supported.
+The execution of FDS via MPI is also supported.
 The following lines of code are examples of commands for Linux host operating systems.
 ```bash
 # FDS 6.2.0 and later
@@ -77,22 +63,16 @@ docker run --rm -v $(pwd):/workdir openbcl/fds lamboot mpirun -np <meshcount> fd
 ```
 
 ## Running FDS in interactive mode
-If you like to run FDS inside an interactive shell run one of the following commands depending on your host operating system and docker mode.
+If you like to run FDS inside an interactive shell run one of the following commands depending on your host operating system.
 ```bash
 # Linux / Mac OS
 docker run --rm -it -v $(pwd):/workdir openbcl/fds
 
-# Windows PowerShell running Docker in Linux mode
+# Windows PowerShell
 docker run --rm -it -v ${pwd}:/workdir openbcl/fds
 
-# Windows PowerShell running Docker in Windows mode
-docker run --rm -it -v ${pwd}:C:\workdir openbcl/fds
-
-# Windows Command Prompt running Docker in Linux Mode
+# Windows Command Prompt
 docker run --rm -it -v %cd%:/workdir openbcl/fds
-
-# Windows Command Prompt running Docker in Windows mode
-docker run --rm -it -v %cd%:C:\workdir openbcl/fds
 ```
 
 You will be connected to the interactive shell of your Docker container and have the possibility to start FDS in the usual way.
@@ -113,17 +93,12 @@ After your simulation has finished you are free to close the container via the `
 ## Additional information
 ### OpenMP: OMP_NUM_THREADS
 Usually the setup routine of FDS will set a system environment variable called `OMP_NUM_THREADS`.
-This variable holds a number representing the number of processor cores cut by half. OMP_NUM_THREADS has not been setted during the compilation of this image.
+This variable holds a value representing the number of processor cores cut by half. OMP_NUM_THREADS has not been setted during the compilation of this image.
 Nevertheless FDS will use your machines number of processor cores by default. If you like to specify OMP_NUM_THREADS by yourself you might add `-e OMP_NUM_THREADS=<NR>` to the run-commands described above.
 If you are running FDS together with MPI it makes sense to select the following setting: `-e OMP_NUM_THREADS=1` to disable OpenMP.
 If you are running FDS version 6.7.8 (and later) or FDS version 5.5.3 OpenMP is disabled by default.
 
-**For FDS version 6.7.8 (and later) you should replace `fds` with `fds_openmp` in your command to be able to run FDS together with OpenMP.**
-
-
-### WINDOWS: [Isolation Modes](https://docs.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/hyperv-container)
-* To create a container with Hyper-V isolation use the `--isolation` parameter to set `--isolation=hyperv`. (default for Windows 10)
-* To create a container with process isolation use the `--isolation` parameter to set `--isolation=process`. (default for Windows Server)
+**For FDS version 6.7.8 (and later) you you have to replace `fds` with `fds_openmp` in your command if you want to run FDS together with OpenMP.**
 
 ## Known errors and possible solutions
 ### KILLED BY SIGNAL: 7: Error when using mpiexec
@@ -137,7 +112,7 @@ If you get an error like the following, you should increase the shared memory.
 ```
 To do so add `--shm-size=384M` to the `docker run` command described above.
 This will increase the default shared memory of Docker (64MB) to 384MB.
-Maybe you have to chose a higher value (depending on your simulation).
+Maybe you have to choose a higher value (depending on your simulation).
 
 ### LINUX: segmentation fault occurred
 If you are running a Linux host operating system and get the following [error](https://github.com/firemodels/fds/issues/6265) you should set ulimit stack size to unlimited.
