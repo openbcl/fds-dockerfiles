@@ -1,5 +1,5 @@
 # Ubuntu Image
-FROM ubuntu:18.04
+FROM ubuntu:22.04
 
 # provide setup-file
 ARG setupfile=https://github.com/firemodels/fds/releases/download/FDS6.7.8/FDS6.7.8_SMV6.7.19_rls_lnx.sh
