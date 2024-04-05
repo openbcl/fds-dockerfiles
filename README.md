@@ -1,32 +1,4 @@
-*[This image](https://hub.docker.com/r/openbcl/fds) is maintained by third party. It provides the [FDS binaries from the National Institute of Standards and Technology (NIST)](https://pages.nist.gov/fds-smv/) for Windows and Linux containers. The use of this image is at your own risk. At the moment the image is based on [Ubuntu](https://hub.docker.com/_/ubuntu). Smokeview is not included. You may want to [download Smokeview](https://pages.nist.gov/fds-smv/downloads.html) and install it on your hosts operating system by yourself.*
-
-# Supported tags
-By pulling this image without a tag you will get the `latest` version of FDS for your operating system. If you prefer another version of FDS you are free to add the version as a tag like (`5.5.3`, `6.5.3`, ...).
-
-The following table provides information about the basic runability of fds containers for different operating systems.
-
-| FDS-Version (Tag)   | Linux                | WSL 2 (Windows) / Hyperkit (Mac OS) <sup>\*1</sup>  |
-| ------------------- | :------------------- | :-------------------------------------------------- |
-| 6.9.0, latest       | ✅                   | ✅                                                 |
-| 6.8.0               | ✅                   | ✅                                                 |
-| 6.7.9               | ✅                   | ✅                                                 |
-| 6.7.8               | ✅                   | ✅                                                 |
-| 6.7.7               | ✅                   | ✅                                                 |
-| 6.7.6               | ✅                   | ✅                                                 |
-| 6.7.5               | ✅                   | ✅                                                 |
-| 6.7.4               | ✅                   | ✅                                                 |
-| 6.7.3               | ✅                   | ✅                                                 |
-| 6.7.1               | ☑️ <sup>\*2</sup>    | ☑️ <sup>\*2</sup>                                  |
-| 6.7.0               | ✅                   | ❌                                                 |
-| 6.6.0               | ✅                   | ❌                                                 |
-| 6.5.3               | ☑️ <sup>\*2</sup>    | ☑️ <sup>\*2</sup>                                  |
-| 6.3.0               | ☑️ <sup>\*2</sup>    | ☑️ <sup>\*2</sup>                                  |
-| 6.2.0               | ☑️ <sup>\*2</sup>    | ☑️ <sup>\*2</sup>                                  |
-| 5.5.3               | ✅                   | ✅                                                 |
-
-<sup>\*1</sup> Running with Docker Desktop based on Hyperkit (Mac OS) or WSL 2 (Windows) which are a lightweight virtualization solutions for Linux Docker containers.
-
-<sup>\*2</sup> Running with [warning](https://stackoverflow.com/questions/46138549/docker-openmpi-and-unexpected-end-of-proc-mounts-line). This should not affect the functionality of FDS.
+*[This image](https://hub.docker.com/r/openbcl/fds) is maintained by third party. It provides [FDS binaries from the National Institute of Standards and Technology (NIST)](https://pages.nist.gov/fds-smv/). The use of this image is at your own risk. At the moment this image is based on [Ubuntu](https://hub.docker.com/_/ubuntu). Smokeview is not included. You may want to [download Smokeview](https://pages.nist.gov/fds-smv/downloads.html) and install it on your hosts operating system by yourself.*
 
 # How to use this image
 
@@ -34,10 +6,28 @@ To run the latest version of FDS (without doing simulation at all) please run th
 ```bash
 docker run --rm openbcl/fds fds
 ```
-To run another version of FDS (e.g. 6.7.3) you have to append the corresponding tag to the image name.
+To run another version of FDS (e.g. 6.9.0) you have to append the corresponding tag to the image name.
 ```bash
-docker run --rm openbcl/fds:6.7.3 fds
+docker run --rm openbcl/fds:6.9.0 fds
 ```
+
+# Supported tags
+By pulling this image without a tag you will get the `latest` version of FDS. If you prefer another version of FDS you are free to add the version as a tag like (`5.5.3`, `6.5.3`, ...).
+
+| FDS-Version (Tag)   | Linux                | WSL 2 (Windows) / Hyperkit (Mac OS) |
+| ------------------- | :------------------- | :---------------------------------- |
+| > 6.7.3             | ✅                   | ✅                                 |
+| 6.7.1               | ☑️                   | ☑️                                 |
+| 6.7.0               | ✅                   | ❌                                 |
+| 6.6.0               | ✅                   | ❌                                 |
+| 6.5.3               | ☑️                   | ☑️                                 |
+| 6.3.0               | ☑️                   | ☑️                                 |
+| 6.2.0               | ☑️                   | ☑️                                 |
+| 5.5.3               | ✅                   | ✅                                 |
+
+✅ Running
+☑️ Running with [warning](https://stackoverflow.com/questions/46138549/docker-openmpi-and-unexpected-end-of-proc-mounts-line). This should not affect the functionality of FDS.
+❌ Not compatible
 
 ## Running FDS in non-interactive mode (recommended)
 In order for FDS to access a simulation file within the Docker container you have to share a folder on your local file system with the container.
@@ -83,7 +73,7 @@ You will be connected to the interactive shell of your Docker container and have
 # FDS (without MPI)
 fds <filename>.fds
 
-# FDS 6.5.3 and later (with MPI)
+# FDS 6.2.0 and later (with MPI)
 mpiexec -n <meshcount> fds <filename>.fds
 
 # FDS 5.5.3 (with MPI)
