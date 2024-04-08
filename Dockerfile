@@ -4,7 +4,7 @@
 FROM alpine as fds
 # download
 ADD https://github.com/firemodels/fds/releases/download/Git/FDS_5.5.3-SMV_5.6_linux_64.tar.gz /root/
-# extract
+# extract and cleanup
 RUN tar xvf /root/*.tar.gz -C /root/ && \
     rm /root/*.tar.gz && \
     mv /root/FDS/FDS5/bin/fds5_linux_64 /root/FDS/FDS5/bin/fds && \
@@ -17,9 +17,9 @@ RUN tar xvf /root/*.tar.gz -C /root/ && \
     printf  '#!/bin/bash\nlamboot_orig\n$@' >> /root/FDS/lamboot && \
     chmod 755 /root/FDS/lamboot
 
-############################
-# Download and extract FDS #
-############################
+#####################
+# Copy FDS binaries #
+#####################
 FROM ubuntu:22.04
 # set environment variables
 ENV LAMHELPDIR=/etc/lam/
