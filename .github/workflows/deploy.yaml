@@ -105,7 +105,7 @@ jobs:
     steps:
       - name: Check BatchFDS compatibility
         env:
-          MIN_VERSION: 6.2.0
+          MIN_VERSION: 6.7.1
         run: |
           version_greater_equal() {
             printf '%s\n%s\n' "$2" "$1" | sort --check=quiet --version-sort
