@@ -49,7 +49,7 @@ jobs:
         env:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          if [[ ${{ !contains(github.ref_name, 'nightly') }} == true ]]
+          if [[ ${{ contains(github.ref_name, 'nightly') }} == true ]]
           then
             echo "IS_LATEST=false" >> $GITHUB_OUTPUT
           else
