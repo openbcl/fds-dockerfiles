@@ -1,18 +1,26 @@
-*[This image](https://hub.docker.com/r/openbcl/fds) is maintained by third party. It provides [FDS binaries from the National Institute of Standards and Technology (NIST)](https://pages.nist.gov/fds-smv/). The use of this image is at your own risk. At the moment this image is based on [Ubuntu](https://hub.docker.com/_/ubuntu). Smokeview is not included. You may want to [download Smokeview](https://pages.nist.gov/fds-smv/downloads.html) and install it on your hosts operating system by yourself.*
+# FDS-Dockerfiles
+> [!IMPORTANT]
+> These Dockerfiles and the resulting [Docker images](https://github.com/openbcl/fds-dockerfiles/pkgs/container/fds) are maintained by third party. They include and provide [FDS binaries from the National Institute of Standards and Technology (NIST)](https://pages.nist.gov/fds-smv/). The use of this images is at your own risk.
 
-# How to use this image
+## How to use this image
+> [!NOTE]  
+> At the moment this image is based on [Ubuntu](https://hub.docker.com/_/ubuntu). Smokeview is not included. You may want to [download Smokeview](https://pages.nist.gov/fds-smv/downloads.html) and install it on your hosts operating system by yourself.
+
+> [!NOTE]  
+> This image is also hosted on Docker Hub and kept up to date. If you are interested, please have a look [here](https://hub.docker.com/r/openbcl/fds).
 
 To run the latest version of FDS (without doing simulation at all) please run the following command for testing purposes.
 ```bash
-docker run --rm openbcl/fds fds
+docker run --rm ghcr.io/openbcl/fds fds
 ```
 To run another version of FDS (e.g. 6.9.0) you have to append the corresponding tag to the image name.
 ```bash
-docker run --rm openbcl/fds:6.9.0 fds
+docker run --rm ghcr.io/openbcl/fds:6.9.0 fds
 ```
 
-# Supported tags
+## Supported tags
 By pulling this image without a tag you will get the `latest` version of FDS. If you prefer another version of FDS you are free to add the version as a tag like (`5.5.3`, `6.5.3`, ...).
+You can find a list of all available tags [here](https://github.com/openbcl/fds-dockerfiles/pkgs/container/fds/versions).
 
 | FDS-Version (Tag)   | Linux                | WSL 2 (Windows) / Hyperkit (Mac OS) |
 | ------------------- | :------------------- | :---------------------------------- |
@@ -35,36 +43,36 @@ To do so navigate with your Terminal/Shell to a simulation folder (containing a 
 *Please note: On Windows only local disks can currently be mounted as volumes. Therefore network drives or network paths cannot be mounted as volumes yet.*
 ```bash
 # Linux / Mac OS
-docker run --rm -v $(pwd):/workdir openbcl/fds fds <filename>.fds
+docker run --rm -v $(pwd):/workdir ghcr.io/openbcl/fds fds <filename>.fds
 
 # Windows PowerShell
-docker run --rm -v ${pwd}:/workdir openbcl/fds fds <filename>.fds
+docker run --rm -v ${pwd}:/workdir ghcr.io/openbcl/fds fds <filename>.fds
 
 # Windows Command Prompt
-docker run --rm -v %cd%:/workdir openbcl/fds fds <filename>.fds
+docker run --rm -v %cd%:/workdir ghcr.io/openbcl/fds fds <filename>.fds
 ```
 
 The execution of FDS via MPI is also supported.
 The following lines of code are examples of commands for Linux host operating systems.
 ```bash
 # FDS 6.2.0 and later
-docker run --rm -v $(pwd):/workdir openbcl/fds mpiexec -n <meshcount> fds <filename>.fds
+docker run --rm -v $(pwd):/workdir ghcr.io/openbcl/fds mpiexec -n <meshcount> fds <filename>.fds
 
 # FDS 5.5.3
-docker run --rm -v $(pwd):/workdir openbcl/fds lamboot mpirun -np <meshcount> fds_mpi <filename>.fds
+docker run --rm -v $(pwd):/workdir ghcr.io/openbcl/fds lamboot mpirun -np <meshcount> fds_mpi <filename>.fds
 ```
 
 ## Running FDS in interactive mode
 If you like to run FDS inside an interactive shell run one of the following commands depending on your host operating system.
 ```bash
 # Linux / Mac OS
-docker run --rm -it -v $(pwd):/workdir openbcl/fds
+docker run --rm -it -v $(pwd):/workdir ghcr.io/openbcl/fds
 
 # Windows PowerShell
-docker run --rm -it -v ${pwd}:/workdir openbcl/fds
+docker run --rm -it -v ${pwd}:/workdir ghcr.io/openbcl/fds
 
 # Windows Command Prompt
-docker run --rm -it -v %cd%:/workdir openbcl/fds
+docker run --rm -it -v %cd%:/workdir ghcr.io/openbcl/fds
 ```
 
 You will be connected to the interactive shell of your Docker container and have the possibility to start FDS in the usual way.
@@ -115,5 +123,3 @@ To do so add `--ulimit stack=-1` to the `docker run` command described above.
 
 ## DISCLAIMER
 **THIS DOCKER IMAGE IS NOT ORIGINALLY PROVIDED BY NIST. THIS IS THIRD PARTY. WE MAKE NO WARRANTY OF ANY KIND, EXPRESS, IMPLIED, IN FACT OR ARISING BY OPERATION OF LAW, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT AND DATA ACCURACY. WE NEITHER REPRESENTS NOR WARRANTS THAT THE OPERATION OF THE SOFTWARE WILL BE UNINTERRUPTED OR ERROR-FREE, OR THAT ANY DEFECTS WILL BE CORRECTED. WE DO NOT WARRANT OR MAKE ANY REPRESENTATIONS REGARDING THE USE OF THE SOFTWARE OR THE RESULTS THEREOF, INCLUDING BUT NOT LIMITED TO THE CORRECTNESS, ACCURACY, RELIABILITY, OR USEFULNESS OF THE SOFTWARE.**
-
-**This image is not intended to be used in any situation where a failure could cause risk of injury or damage to property.**
