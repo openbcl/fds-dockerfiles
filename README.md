@@ -3,12 +3,6 @@
 > These Dockerfiles and the resulting [Docker images](https://github.com/openbcl/fds-dockerfiles/pkgs/container/fds) are maintained by third party. They include and provide [FDS binaries from the National Institute of Standards and Technology (NIST)](https://pages.nist.gov/fds-smv/). The use of this images is at your own risk.
 
 ## How to use this image
-> [!NOTE]  
-> At the moment this image is based on [Ubuntu](https://hub.docker.com/_/ubuntu). Smokeview is not included. You may want to [download Smokeview](https://pages.nist.gov/fds-smv/downloads.html) and install it on your hosts operating system by yourself.
-
-> [!NOTE]  
-> This image is also hosted on Docker Hub and kept up to date. If you are interested, please have a look [here](https://hub.docker.com/r/openbcl/fds).
-
 To run the latest version of FDS (without doing simulation at all) please run the following command for testing purposes.
 ```bash
 docker run --rm ghcr.io/openbcl/fds fds
@@ -17,6 +11,9 @@ To run another version of FDS (e.g. 6.9.0) you have to append the corresponding 
 ```bash
 docker run --rm ghcr.io/openbcl/fds:6.9.0 fds
 ```
+
+> [!NOTE]  
+> At the moment this image is based on [Ubuntu](https://hub.docker.com/_/ubuntu). Smokeview is not included. You may want to [download Smokeview](https://pages.nist.gov/fds-smv/downloads.html) and install it on your hosts operating system by yourself.
 
 ## Supported tags
 By pulling this image without a tag you will get the `latest` version of FDS. If you prefer another version of FDS you are free to add the version as a tag like (`5.5.3`, `6.5.3`, ...).
