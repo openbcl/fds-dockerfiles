@@ -10,8 +10,8 @@ RUN apk add --no-cache bash
 RUN chmod +x /root/*.sh && \
     /root/*.sh y && \
     rm /root/*.sh && \
-    mv /root/FDS/FDS6/bin/* /root/FDS/ && \
-    rm -rf /root/FDS/FDS6 && \
+    mv /root/FDS/FDS*/bin/* /root/FDS/ && \
+    find /root/FDS/* -type d -name "FDS*" -exec rm -rf {} + && \
     rm /root/FDS/*VARS.sh
 
 #####################
