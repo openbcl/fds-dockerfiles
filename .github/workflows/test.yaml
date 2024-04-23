@@ -1,0 +1,50 @@
+name: Test FDS Release
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'test/[0-9]+.[0-9]+.[0-9]+'
+      - 'test/nightly-[0-9]+.[0-9]+.[0-9]+-[0-9]+'
+jobs:
+  check-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+      - name: Run Test
+        run: chmod +x ./test/run.sh && ./test/run.sh
+      - name: Cleanup nightly branches
+        continue-on-error: true
+        run: |
+          if [[ $GITHUB_REF_NAME = test/nightly* ]]
+          then            
+            REGEX_RELEASE="nightly\-[0-9]+\.[0-9]+\.[0-9]+(\-[0-9]+)?"
+            BRANCHES=$(curl --silent -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" \
+              -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+              "https://api.github.com/repos/${{ github.repository }}/branches" --stderr - | grep -oEi ${REGEX_RELEASE})
+            for BRANCH in ${BRANCHES}; do
+              git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+              git config user.name "github-actions[bot]"
+              git push origin --delete ${BRANCH}
+            done
+          fi
+      - name: Create new branch
+        run: |
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          BRANCH=${{ github.ref_name }}
+          NEW_BRANCH=$(echo ${BRANCH#test/} | grep -oEi "(nightly-)?[0-9]+\.[0-9]+\.[0-9]+")
+          echo "NEW_BRANCH=${NEW_BRANCH}" >> $GITHUB_ENV
+          git switch -c ${NEW_BRANCH}
+          git push --set-upstream origin ${NEW_BRANCH}
+      - name: Trigger Deploy
+        run: |
+          curl -L  -X POST  -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" \
+          -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+          https://api.github.com/repos/${{ github.repository }}/actions/workflows/deploy.yaml/dispatches \
+          -d "{\"ref\":\"${{ env.NEW_BRANCH }}\"}"
