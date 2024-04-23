@@ -1,3 +1,3 @@
 *.cmd
 *.sh
-test
+!test/run.sh
