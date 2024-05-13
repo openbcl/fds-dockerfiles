@@ -20,11 +20,11 @@ RUN tar xvf /root/*.tar.gz -C /root/ && \
 #####################
 # Copy FDS binaries #
 #####################
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 # set environment variables
 ENV LAMHELPDIR=/etc/lam/
 # install lam mpi and add lam user
-RUN apt-get update && apt-get install -y lam-runtime && adduser --system --no-create-home lam && mv /usr/bin/lamboot /usr/bin/lamboot_orig
+RUN apt-get update && apt-get install -y lam-runtime sudo && adduser --system --no-create-home lam && mv /usr/bin/lamboot /usr/bin/lamboot_orig
 # copy binaries
 COPY --from=fds /root/FDS/* /usr/bin/
 # login as lam user
