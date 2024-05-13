@@ -17,7 +17,7 @@ echo '&HEAD CHID='test', TITLE='Test' /
 echo $'\n#######################'
 echo '# Run test simulation #'
 echo $'#######################\n'
-docker run --rm --ulimit stack=-1 -v $(pwd):/workdir fds mpiexec -n 1 fds test.fds
+docker run --rm --ulimit stack=-1 --user 0 -v $(pwd):/workdir fds bash -c "cp test.fds /tmp/test.fds && cd /tmp/ && sudo -u lam lamboot mpirun -np 1 fds_mpi test.fds && cp ./test.out /workdir/test.out"
 if grep -q "STOP: FDS completed successfully" ./test.out; then
     SUCCESS=0
     echo $'\n################################'
