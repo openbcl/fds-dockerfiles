@@ -25,7 +25,7 @@ RUN cd /tmp && \
 #####################
 # Copy FDS binaries #
 #####################
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 # set environment variables
 ENV FDSBINDIR=/usr/bin
 ENV INTEL_SHARED_LIB=/usr/lib/x86_64-linux-gnu
@@ -36,9 +36,9 @@ ENV LD_LIBRARY_PATH=$MPIDIST/lib:$FDSBINDIR/LIB64:$INTEL_SHARED_LIB:$LD_LIBRARY_
 # copy binaries
 COPY --from=fds /root/FDS /usr/bin/
 # Install dependencies and symlink crypto and ssl libraries
-RUN apt-get update && apt-get install -y libnuma1 libxml2 && \
-    ln -s /usr/lib/x86_64-linux-gnu/libcrypto.so.3 /usr/lib/x86_64-linux-gnu/libcrypto.so.10 && \
-    ln -s /usr/lib/x86_64-linux-gnu/libssl.so.3 /usr/lib/x86_64-linux-gnu/libssl.so.10
+RUN apt-get update && apt-get install -y libnuma1 libxml2 adduser sudo && \
+ln -s /usr/lib/x86_64-linux-gnu/libcrypto.so.3 /usr/lib/x86_64-linux-gnu/libcrypto.so.10 && \
+ln -s /usr/lib/x86_64-linux-gnu/libssl.so.3 /usr/lib/x86_64-linux-gnu/libssl.so.10
 # add mpi user
 RUN adduser --system --no-create-home mpi
 # login as mpi user
