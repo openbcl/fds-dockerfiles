@@ -18,7 +18,7 @@ RUN chmod +x /root/*.sh && \
 #####################
 # Copy FDS binaries #
 #####################
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 # set environment variables
 ENV FDSBINDIR=/root/FDS
 ENV PATH=$FDSBINDIR:$PATH
