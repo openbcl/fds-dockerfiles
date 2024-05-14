@@ -17,7 +17,14 @@ echo '&HEAD CHID='test', TITLE='Test' /
 echo $'\n#######################'
 echo '# Run test simulation #'
 echo $'#######################\n'
-docker run --rm --ulimit stack=-1 -v $(pwd):/workdir fds mpiexec -n 1 fds test.fds
+echo '#!/bin/bash
+PATH=$MPIDIST/bin:$FDSBINDIR:$PATH
+export LD_LIBRARY_PATH=$MPIDIST/lib:$FDSBINDIR/LIB64:$INTEL_SHARED_LIB:$LD_LIBRARY_PATH
+cp test.fds /tmp/test.fds
+cd /tmp/
+mpiexec -n 1 fds test.fds
+' >> test.sh && chmod +x test.sh
+docker run --rm --ulimit stack=-1 --user 0 -v $(pwd):/workdir fds bash -c 'sudo -E -u mpi ./test.sh && cp /tmp/test.out /workdir/test.out'
 if grep -q "STOP: FDS completed successfully" ./test.out; then
     SUCCESS=0
     echo $'\n################################'
