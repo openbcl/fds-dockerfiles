@@ -3,7 +3,7 @@
 ############################
 FROM alpine as fds
 # download
-ADD https://github.com/firemodels/fds/releases/download/FDS-6.9.1/FDS-6.9.1_SMV-6.9.1_lnx.sh /root/
+ADD https://github.com/firemodels/fds/releases/download/FDS-6.10.0/FDS-6.10.0_SMV-6.10.0_lnx.sh /root/
 # install dependencies
 RUN apk add --no-cache bash
 # extract
