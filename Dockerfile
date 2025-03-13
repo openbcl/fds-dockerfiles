@@ -1,7 +1,7 @@
 ############################
 # Download and extract FDS #
 ############################
-FROM alpine as fds
+FROM alpine AS fds
 # download
 ADD https://github.com/firemodels/fds/releases/download/FDS-6.10.0/FDS-6.10.0_SMV-6.10.0_lnx.sh /root/
 # install dependencies
