@@ -54,15 +54,11 @@ jobs:
             echo "IS_LATEST=false" >> $GITHUB_OUTPUT
           else
             REGEX=[0-9]+\.[0-9]+\.[0-9]+
-            LATEST_VERSION=0.0.0
             echo "IS_LATEST=true" >> $GITHUB_OUTPUT
-            VERSIONS=$(curl --silent "https://api.github.com/users/${{ github.repository_owner }}/packages/container/${{ env.IMAGE_NAME }}/versions" --stderr - \
+            LATEST_VERSION=$(curl --silent "https://api.github.com/users/${{ github.repository_owner }}/packages/container/${{ env.IMAGE_NAME }}/versions" --stderr - \
               --header "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" | \
-              grep -E "[[:space:]]+\"${REGEX}\"" | grep -oEi ${REGEX})
-            for VERSION in $VERSIONS; do
-              [ "$VERSION" \> "$LATEST_VERSION" ] && LATEST_VERSION=$VERSION
-            done
-            if [ "${{ env.TAG }}" \< "${LATEST_VERSION}" ]
+              grep -E "[[:space:]]+\"${REGEX}\"" | grep -oEi ${REGEX} | tr " " "\n" | sort -V | tail -n1)
+            if [ "${{ env.TAG }}" != "$LATEST_VERSION" ] && [ "${{ env.TAG }}" == "`echo -e "$LATEST_VERSION\n${{ env.TAG }}" | sort -V | head -n1`" ]
             then
               echo "IS_LATEST=false" >> $GITHUB_OUTPUT
             fi
