@@ -20,7 +20,7 @@ RUN chmod +x /root/*.sh && \
 FROM ubuntu:24.04
 # set environment variables
 ENV FDSBINDIR=/root/FDS
-ENV impihome=$FDSBINDIR/INTEL
+ENV impihome=$FDSBINDIR/intelmpi
 ENV PATH=$FDSBINDIR:$impihome/bin:$PATH
 ENV FI_PROVIDER_PATH=$impihome/prov
 ENV LD_LIBRARY_PATH=/usr/lib64:$impihome/lib:$LD_LIBRARY_PATH
